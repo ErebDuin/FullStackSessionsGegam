@@ -35,5 +35,6 @@ class Student {
         System.out.println("Student ID: " + studentId);
         System.out.println("Full Name: " + firstName + " " + lastName);
         System.out.println("Age: " + age);
+
     }
 }
