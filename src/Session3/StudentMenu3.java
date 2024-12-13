@@ -2,7 +2,7 @@ package Session3;
 
 import java.util.Scanner;
 
-public class StudentMenu {
+public class StudentMenu3 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -22,9 +22,10 @@ public class StudentMenu {
             byte choice = scanner.nextByte();
 
             switch (choice) {
-                case 1:     // Add student details
+                case 1:                                               // Add student details
                     System.out.print("\nEnter student ID: ");
                     studentId = scanner.nextInt();
+                    scanner.nextLine();
 
                     System.out.print("Enter first name: ");
                     firstName = scanner.next().trim().replaceAll("\\s", "");    // Remove white spaces
@@ -39,8 +40,8 @@ public class StudentMenu {
                     }
 
                     System.out.print("Enter last name: ");
-                    lastName = scanner.next().trim().replaceAll("\\s", "");   // Remove white spaces
-                    while (true) {  // Ask last name until it is between 3 and 15 characters
+                    lastName = scanner.next().trim().replaceAll("\\s", "");    // Remove white spaces
+                    while (true) {                                                              // Ask last name until it is between 3 and 15 characters
                         if (lastName.length() < 3 || lastName.length() > 15) {
                             System.out.println("\nLast name should be between 3 and 15 characters\n");
                             System.out.print("Enter last name: ");
@@ -56,7 +57,7 @@ public class StudentMenu {
                     System.out.println("Information added successfully");
                     System.out.println();
                     break;
-                case 2:     // View student details
+                case 2:                                                      // View student details
                     System.out.println();
                     System.out.println("Student ID: " + studentId);
                     System.out.println("First Name: " + firstName);
@@ -64,18 +65,18 @@ public class StudentMenu {
                     System.out.println("Student Age: " + studentAge);
                     System.out.println();
                     break;
-                case 3:     // Reset student details
+                case 3:                                                       // Reset student details
                     studentId = 0;
                     firstName = "";
                     lastName = "";
                     studentAge = 0;
                     System.out.println("\nStudent details successfully reset!\n");
                     break;
-                case 4:     // Exit
+                case 4:                                                       // Exit
                     scanner.close();
                     System.exit(0);
                     break;
-                default:        // Invalid option
+                default:                                                      // Invalid option
                     System.out.print("\nNot supported sption,\nPlease try again!\n\n");
             }
         }
