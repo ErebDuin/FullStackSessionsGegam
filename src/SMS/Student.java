@@ -1,7 +1,12 @@
 package SMS;
 
+import java.util.InputMismatchException;
+import static SMS.ageValidationException.validateAge;
+import static SMS.nameValidationException.validateName;
+import static SMS.majorValidationException.validateMajor;
 
-class Student {
+
+public class Student {
     private static int studentCount = 0;
     private int studentId;
     private String firstName;
@@ -9,14 +14,9 @@ class Student {
     private int studentAge;
     private String studentMajor;
 
-    Student(int id, String fName, String lName, int age, String sMajor) {
-        this.setStudentId(id);
-        this.setStudentFirstName(fName);
-        this.setStudentLastName(lName);
-        this.setStudentAge(age);
-        this.setStudentMajor(sMajor);
-        this.setStudentCount(studentCount++);
+    public Student() {
     }
+
 
 
     public static void setStudentCount(int studentCount) {
@@ -28,32 +28,53 @@ class Student {
     }
 
     public void setStudentId(int id) {
+        studentCount++;
         this.studentId = idGenerator();
     }
 
     public void setStudentFirstName (String fName) {
-        this.firstName = fName;
+        try {
+            String name = fName;
+            validateName(name);
+            this.firstName = fName;
+        }
+        catch (InvalidNameException e) {
+            System.out.println("Invalid name: " + e.getMessage());
+        }
+
     }
 
     public void setStudentLastName(String lName) {
-        this.lastName = lName;
+        try {
+            String name = lName;
+            validateName(name);
+            this.lastName = lName;
+        }
+        catch (InvalidNameException e) {
+            System.out.println("Invalid name: " + e.getMessage());
+        }
     }
 
     public void setStudentAge(int age) {
-        if (age < 18 || age > 150) {
-            System.out.println("Student age is incorrect");
-        }
-        else {
+        try {
+            validateAge(age);
             this.studentAge = age;
+        }
+        catch (InvalidAgeException e) {
+            System.out.println("Invalid age: " + e.getMessage());
+        }
+        catch (InputMismatchException e) {
+            System.out.println("Invalid input: must be a number");
         }
     }
 
     public void setStudentMajor(String sMajor) {
-        if (sMajor.equals("Art") || sMajor.equals("Economics") || sMajor.equals("Math")) {
+        try {
+            validateMajor(sMajor);
             this.studentMajor = sMajor;
         }
-        else {
-            System.out.println("Student major is incorrect");
+        catch (InvalidMajorException e) {
+            System.out.println("Invalid major: " + e.getMessage());
         }
     }
 

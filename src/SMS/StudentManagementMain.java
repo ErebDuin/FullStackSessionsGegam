@@ -3,60 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class StudentManagement {
-
-//    public static int idGenerator() {
-//        return (int) (Math.random() * 1000);
-//    }
-
-
-//    public static String getFirstName() {
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.print("Enter first name: ");
-//        String acquiredFirstName = scanner.next().trim().replaceAll("\\s", "");    // Remove white spaces
-//        while (true) {                                                               // Ask first name until it is between 3 and 15 characters
-//            if (acquiredFirstName.length() < 3 || acquiredFirstName.length() > 15) {
-//                System.out.println("\nFirst name should be between 3 and 15 characters\n");
-//                System.out.print("Enter first name: ");
-//                acquiredFirstName = scanner.next().trim();
-//            } else {
-//                break;
-//            }
-//        }
-//        return acquiredFirstName;
-//    }
-
-
-//    public static String getLastName(){
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.print("Enter last name: ");
-//        String acquiredLastName = scanner.next().trim().replaceAll("\\s", "");    // Remove white spaces
-//        while (true) {                                                                     // Ask last name until it is between 3 and 15 characters
-//            if (acquiredLastName.length() < 3 || acquiredLastName.length() > 15) {
-//                System.out.println("\nLast name should be between 3 and 15 characters\n");
-//                System.out.print("Enter last name: ");
-//                acquiredLastName = scanner.next().trim();
-//            } else {
-//                break;
-//            }
-//        }
-//        return acquiredLastName;
-//    }
-
-
-//    public static int getAgeInput(){
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.print("Enter student age: ");
-//        return scanner.nextInt();
-//    }
-
-
-//    public static String getMajorInput(){
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.print("Enter student major: ");
-//        return scanner.next();
-//    }
-
+public class StudentManagementMain {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -69,24 +16,34 @@ public class StudentManagement {
             System.out.println("3. Delete Student Details");
             System.out.println("4. Edit Student Details");
             System.out.println("5. Exit");
+            System.out.println("==============================");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:                                               // Add student details
+                    Student newStudent = new Student();
+
                     System.out.print("Enter first name: ");
                     String firstName = scanner.next();
+                    newStudent.setStudentFirstName(firstName);
+
                     System.out.print("Enter last name: ");
                     String lastName = scanner.next();
+                    newStudent.setStudentLastName(lastName);
+
                     System.out.print("Enter student age: ");
                     int age = scanner.nextInt();
+                    newStudent.setStudentAge(age);
+
                     System.out.print("Enter student major: ");
                     String major = scanner.next();
+                    newStudent.setStudentMajor(major);
+
                     int studentId = Student.idGenerator();
+                    newStudent.setStudentId(studentId);
 
-                    Student newStudentCreated = new Student(studentId, firstName, lastName, age, major);
-
-                    students.add(newStudentCreated);
+                    students.add(newStudent);
 
                     System.out.println("\nInformation added successfully: \n" + students);
                     System.out.println();
