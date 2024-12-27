@@ -43,6 +43,7 @@ public class StudentManagementMain {
                     int studentId = Student.idGenerator();
                     newStudent.setStudentId(studentId);
 
+
                     students.add(newStudent);
 
                     System.out.println("\nInformation added successfully: \n" + students);

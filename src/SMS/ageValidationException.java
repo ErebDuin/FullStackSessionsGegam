@@ -6,6 +6,7 @@ class InvalidAgeException extends Exception {
     }
 }
 
+
 public class ageValidationException {
     public static void validateAge(int age) throws InvalidAgeException {
         if (age < 18 || age > 100) {

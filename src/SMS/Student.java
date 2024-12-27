@@ -106,6 +106,6 @@ public class Student {
     @Override
     public String toString() {
         //return "Student ID: " + studentId + "\nFirst Name: " + firstName + "\nLast Name: " + lastName + "\nAge: " + studentAge;
-        return String.format("\nStudent ID: %d\nFirst Name: %s\nLast Name: %s\nAge: %d\nMajor: %s\n", studentId, firstName, lastName, studentAge, studentMajor);
+        return String.format("\nStudent ID: %d\nFirst Name: %s\nLast Name: %s\nAge: %d\nMajor: %s\n", studentId, firstName, lastName, studentAge, studentMajor).replace(", N", "N");
     }
 }
