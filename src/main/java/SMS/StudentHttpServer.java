@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 public class StudentHttpServer {
-    private static final int PORT = 8080;
+    private static final int PORT = 8084;
     private final StudentMaintenance studentMaintenance;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
