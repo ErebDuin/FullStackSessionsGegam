@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 public class StudentHttpServer {
-    private static final int PORT = 8080;
+    private static final int PORT = 8084;
     private final StudentMaintenance studentMaintenance;
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final Runtime exitServer = Runtime.getRuntime();
@@ -18,7 +18,7 @@ public class StudentHttpServer {
     }
 
     public static void main(String[] args) throws IOException {
-        UtilityRepository utilityRepository = new UtilityRepositoryFile("/Users/gegam/IdeaProjects/FullStackSessionsGegam/src/main/java/SMS/students.csv");
+        UtilityRepository utilityRepository = new UtilityRepositoryFile("/home/devuser/gegam/FullStackSessionsGegam/src/main/java/SMS/students.csv");
         StudentMaintenance studentMaintenance = new StudentMaintenance(utilityRepository);
         StudentHttpServer server = new StudentHttpServer(studentMaintenance);
         server.start();
