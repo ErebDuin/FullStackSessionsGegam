@@ -20,6 +20,15 @@ public class StudentHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+        exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+        exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS");
+        exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type, X-Api-Key");
+
+        if ("OPTIONS".equals(exchange.getRequestMethod())) {
+            exchange.sendResponseHeaders(204, -1);
+            return;
+        }
+
         if (Authentication.authenticate(exchange)) {
             return;
     }
@@ -92,7 +101,7 @@ public class StudentHandler implements HttpHandler {
         String requestBody = new String(exchange.getRequestBody().readAllBytes());
         JsonNode jsonNode = objectMapper.readTree(requestBody);
 
-        int id = jsonNode.get("id").asInt();
+        int id = studentMaintenance.getStudents().size() + 1;
         String email = jsonNode.get("email").asText();
         String firstName = jsonNode.get("firstName").asText();
         String lastName = jsonNode.get("lastName").asText();

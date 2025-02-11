@@ -1,5 +1,6 @@
 package SMS.menu;
 
+import SMS.StudentHttpServer;
 import SMS.StudentMaintenance;
 
 import java.util.Scanner;
@@ -8,10 +9,12 @@ import java.util.Scanner;
 public class MainMenu {
     private final StudentMaintenance studentMaintenance;
     private final Scanner scanner;
+    private final StudentHttpServer server;
 
-    public MainMenu(StudentMaintenance studentMaintenance, Scanner scanner) {
+    public MainMenu(StudentMaintenance studentMaintenance, Scanner scanner, StudentHttpServer server) {
         this.studentMaintenance = studentMaintenance;
         this.scanner = scanner;
+        this.server = server;
     }
 
 
@@ -50,6 +53,7 @@ public class MainMenu {
                 case 0:
                     System.out.println("Exiting...");
                     studentMaintenance.saveStudents();
+                    server.stop();
                     return;
                 default:
                     System.out.println("Invalid choice. Please try again.");

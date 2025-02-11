@@ -20,15 +20,16 @@ public class Main {
         UtilityRepository utilityRepository = new UtilityRepositoryFile("/Users/gegam/IdeaProjects/FullStackSessionsGegam/src/main/java/SMS/students.csv");
         StudentMaintenance studentMaintenance = new StudentMaintenance(utilityRepository);
 
+        StudentHttpServer server = null;
         try {
-            StudentHttpServer server = new StudentHttpServer(studentMaintenance);
+            server = new StudentHttpServer(studentMaintenance);
             server.start();
         } catch (IOException e) {
             System.out.println("Error starting the server: " + e.getMessage());
         }
 
         Scanner scanner = new Scanner(System.in);
-        MainMenu mainMenu = new MainMenu(studentMaintenance, scanner);
+        MainMenu mainMenu = new MainMenu(studentMaintenance, scanner, server);
         mainMenu.displayMenu();
     }
 }

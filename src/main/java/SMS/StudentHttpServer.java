@@ -8,9 +8,10 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 public class StudentHttpServer {
-    private static final int PORT = 8084;
+    private static final int PORT = 8080;
     private final StudentMaintenance studentMaintenance;
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private final Runtime exitServer = Runtime.getRuntime();
 
     public StudentHttpServer(StudentMaintenance studentMaintenance) {
         this.studentMaintenance = studentMaintenance;
@@ -30,5 +31,9 @@ public class StudentHttpServer {
         server.setExecutor(null);
         server.start();
         System.out.println("HTTP server started on port " + PORT);
+    }
+
+    public void stop() {
+        exitServer.exit(0);
     }
 }

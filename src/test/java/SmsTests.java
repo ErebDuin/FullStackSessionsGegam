@@ -112,20 +112,20 @@ public class SmsTests {
                 .statusCode(200)
                 .extract().response();
 
-        Map<String,Object> item = response.jsonPath().get();
-        String id = item.get("id").toString();
-        idToEdit = Integer.parseInt(id);
+//        Map<String,Object> item = response.jsonPath().get();
+//        String id = item.get("id").toString();
+//        idToEdit = Integer.parseInt(id);
     }
 
-//    @Test
-//    @Order(6)
-//    public void testDeleteStudent() {
-//        given()
-//                .header("X-Api-Key","")
-//                .when()
-//                .delete("/?id=" + idToEdit)
-//                .then()
-//                .log().all()
-//                .statusCode(200);
-//    }
+    @Test
+    @Order(6)
+    public void testDeleteStudent() {
+        given()
+                .header("X-Api-Key","")
+                .when()
+                .delete("/?id=" + idToEdit)
+                .then()
+                .log().all()
+                .statusCode(200);
+    }
 }
