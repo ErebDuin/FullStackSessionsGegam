@@ -25,12 +25,16 @@ public class StudentHttpServer {
     }
 
     public void start() throws IOException {
-        HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
-        server.createContext("/students", new StudentHandler(objectMapper, studentMaintenance));
-        server.createContext("/graduate", new GraduationHandler(objectMapper, studentMaintenance));
-        server.setExecutor(null);
-        server.start();
-        System.out.println("HTTP server started on port " + PORT);
+        try {
+            HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
+            server.createContext("/students", new StudentHandler(objectMapper, studentMaintenance));
+            server.createContext("/graduate", new GraduationHandler(objectMapper, studentMaintenance));
+            server.setExecutor(null);
+            server.start();
+            System.out.println("HTTP server started on port " + PORT);
+        } catch (IOException e) {
+            System.out.println("Error starting HTTP server: " + e.getMessage());
+        }
     }
 
     public void stop() {

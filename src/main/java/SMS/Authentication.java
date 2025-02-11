@@ -9,7 +9,17 @@ public class Authentication {
     public static boolean authenticate(HttpExchange exchange) throws IOException {
         String apiKey = exchange.getRequestHeaders().getFirst("X-Api-Key");
         if (apiKey != null) {
-            return apiKey.equals("superSecretKey");
+            if (apiKey.equals("superSecretKey")) {
+                return true;
+            } else {
+                String response = "{\"error\":\"Unauthorized\"}";
+                exchange.getResponseHeaders().set("Content-Type", "application/json");
+                exchange.sendResponseHeaders(401, response.getBytes().length);
+                OutputStream os = exchange.getResponseBody();
+                os.write(response.getBytes());
+                os.close();
+                return false;
+            }
         } else {
             String response = "{\"error\":\"Unauthorized\"}";
             exchange.getResponseHeaders().set("Content-Type", "application/json");

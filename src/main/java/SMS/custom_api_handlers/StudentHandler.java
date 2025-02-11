@@ -29,7 +29,7 @@ public class StudentHandler implements HttpHandler {
             return;
         }
 
-        if (Authentication.authenticate(exchange)) {
+        if (!Authentication.authenticate(exchange)) {
             return;
     }
         String method = exchange.getRequestMethod();

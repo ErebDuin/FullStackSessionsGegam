@@ -29,7 +29,7 @@ public class GraduationHandler implements HttpHandler {
             return;
         }
 
-        if (Authentication.authenticate(exchange)) {
+        if (!Authentication.authenticate(exchange)) {
             return;
         }
 
