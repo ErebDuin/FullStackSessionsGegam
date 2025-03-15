@@ -10,11 +10,10 @@ import java.io.OutputStream;
 import java.util.List;
 
 public class StudentHandler implements HttpHandler {
-    private final ObjectMapper objectMapper;
     private final StudentMaintenance studentMaintenance;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public StudentHandler(ObjectMapper objectMapper, StudentMaintenance studentMaintenance) {
-        this.objectMapper = objectMapper;
+    public StudentHandler(StudentMaintenance studentMaintenance) {
         this.studentMaintenance = studentMaintenance;
     }
 
@@ -22,7 +21,7 @@ public class StudentHandler implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
         exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
         exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS");
-        exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type, X-Api-Key");
+        exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type, token");
 
         if ("OPTIONS".equals(exchange.getRequestMethod())) {
             exchange.sendResponseHeaders(204, -1);

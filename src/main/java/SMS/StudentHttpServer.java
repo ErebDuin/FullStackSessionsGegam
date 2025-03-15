@@ -1,16 +1,13 @@
 package SMS;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import SMS.custom_api_handlers.*;
 import com.sun.net.httpserver.HttpServer;
-import SMS.custom_api_handlers.GraduationHandler;
-import SMS.custom_api_handlers.StudentHandler;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
 public class StudentHttpServer {
-    private static final int PORT = 8084;
+    private static final int PORT = 8080;
     private final StudentMaintenance studentMaintenance;
-    private final ObjectMapper objectMapper = new ObjectMapper();
     private final Runtime exitServer = Runtime.getRuntime();
 
     public StudentHttpServer(StudentMaintenance studentMaintenance) {
@@ -18,7 +15,7 @@ public class StudentHttpServer {
     }
 
     public static void main(String[] args) throws IOException {
-        UtilityRepository utilityRepository = new UtilityRepositoryFile("/home/devuser/gegam/FullStackSessionsGegam/src/main/java/SMS/students.csv");
+        UtilityRepository utilityRepository = new UtilityRepositoryFile("/Users/gegam/IdeaProjects/FullStackSessionsGegam/src/main/java/SMS/students.csv");
         StudentMaintenance studentMaintenance = new StudentMaintenance(utilityRepository);
         StudentHttpServer server = new StudentHttpServer(studentMaintenance);
         server.start();
@@ -27,8 +24,9 @@ public class StudentHttpServer {
     public void start() throws IOException {
         try {
             HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
-            server.createContext("/students", new StudentHandler(objectMapper, studentMaintenance));
-            server.createContext("/graduate", new GraduationHandler(objectMapper, studentMaintenance));
+            server.createContext("/students", new StudentHandler(studentMaintenance));
+            server.createContext("/graduate", new GraduationHandler(studentMaintenance));
+            server.createContext("/authenticate", new AuthenticationHandler());
             server.setExecutor(null);
             server.start();
             System.out.println("HTTP server started on port " + PORT);

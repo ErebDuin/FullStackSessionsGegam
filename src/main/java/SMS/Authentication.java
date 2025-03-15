@@ -2,32 +2,31 @@ package SMS;
 
 import com.sun.net.httpserver.HttpExchange;
 
-import java.io.IOException;
-import java.io.OutputStream;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Authentication {
-    public static boolean authenticate(HttpExchange exchange) throws IOException {
-        String apiKey = exchange.getRequestHeaders().getFirst("X-Api-Key");
-        if (apiKey != null) {
-            if (apiKey.equals("superSecretKey")) {
-                return true;
-            } else {
-                String response = "{\"error\":\"Unauthorized\"}";
-                exchange.getResponseHeaders().set("Content-Type", "application/json");
-                exchange.sendResponseHeaders(401, response.getBytes().length);
-                OutputStream os = exchange.getResponseBody();
-                os.write(response.getBytes());
-                os.close();
-                return false;
-            }
-        } else {
-            String response = "{\"error\":\"Unauthorized\"}";
-            exchange.getResponseHeaders().set("Content-Type", "application/json");
-            exchange.sendResponseHeaders(401, response.getBytes().length);
-            OutputStream os = exchange.getResponseBody();
-            os.write(response.getBytes());
-            os.close();
-            return false;
+    private static final Set<String> validTokens = new HashSet<>();
+
+    public static boolean validateCredentials(String login, String password) {
+        // Implement your login and password validation logic here
+        return "admin".equals(login) && "password".equals(password);
+    }
+
+    public static void storeToken(String token) {
+        validTokens.add(token);
+    }
+
+    public static boolean authenticate(HttpExchange exchange) {
+        String token = exchange.getRequestHeaders().getFirst("token");
+        if (token != null && validTokens.contains(token)) {
+            return true;
         }
+        try {
+            exchange.sendResponseHeaders(401, -1); // Unauthorized
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

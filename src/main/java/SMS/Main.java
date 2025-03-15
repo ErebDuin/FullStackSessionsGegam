@@ -17,7 +17,7 @@ public class Main {
      * @param args command-line arguments (not used)
      */
     public static void main(String[] args) {
-        UtilityRepository utilityRepository = new UtilityRepositoryFile("/home/devuser/gegam/FullStackSessionsGegam/src/main/java/SMS/students.csv");
+        UtilityRepository utilityRepository = new UtilityRepositoryFile("/Users/gegam/IdeaProjects/FullStackSessionsGegam/src/main/java/SMS/students.csv");
         StudentMaintenance studentMaintenance = new StudentMaintenance(utilityRepository);
 
         StudentHttpServer server = null;
