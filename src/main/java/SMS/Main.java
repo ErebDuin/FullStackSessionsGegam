@@ -28,8 +28,18 @@ public class Main {
             System.out.println("Error starting the server: " + e.getMessage());
         }
 
-        Scanner scanner = new Scanner(System.in);
-        MainMenu mainMenu = new MainMenu(studentMaintenance, scanner, server);
-        mainMenu.displayMenu();
+        boolean noUI = false;
+        for (String arg : args) {
+            if ("--noui".equals(arg)) {
+                noUI = true;
+                break;
+            }
+        }
+
+        if (!noUI) {
+            Scanner scanner = new Scanner(System.in);
+            MainMenu mainMenu = new MainMenu(studentMaintenance, scanner, server);
+            mainMenu.displayMenu();
+        }
     }
 }
